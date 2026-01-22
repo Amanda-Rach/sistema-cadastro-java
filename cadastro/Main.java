@@ -13,7 +13,7 @@ public class Main {
 
         int opcao;
 
-        do{
+        do{ 
             System.out.println("===== SISTEMA DE CADASTRO =====");
             System.out.println("1 - Cadastrar pessoa");
             System.out.println("2 - Listar pessoas");
@@ -26,6 +26,7 @@ public class Main {
 
             switch(opcao){ //Serve como menu
                 case 1:
+                    
                     System.out.print("Nome: ");
                     String nome = scanner.nextLine();
 
@@ -34,12 +35,23 @@ public class Main {
 
                     System.out.print("Idade: ");
                     int idade = scanner.nextInt();
-                    scanner.nextLine();
-
-                    Pessoa p = new Pessoa(nome, cpf, idade);
-                    pessoas.add(p);
-
-                    System.out.println("Pessoa cadastrada com sucesso!\n");
+                    scanner.nextLine(); //limpa o buffer
+                    
+                    //Validacao de cpf para cadastramento, evitando duplo cadastramento de um mesmo cpf
+                    boolean jaExiste = false;
+                    for(Pessoa pessoa : pessoas){
+                        if(pessoa.getCpf().equals(cpf)){
+                            jaExiste = true;
+                            break;
+                        }
+                    }
+                    //caso ja exista, nao permite o cadastramento
+                    if(!jaExiste){
+                        pessoas.add(new Pessoa(nome, cpf, idade));
+                        System.out.println("Pessoa cadastrada com sucesso.\n");
+                    } else {
+                        System.out.println("Erro: CPF ja cadastrado.\n");
+                    }
                     break;
 
                 case 2:
