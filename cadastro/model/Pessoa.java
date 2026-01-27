@@ -41,4 +41,7 @@ public class Pessoa {
         System.out.println("Idade: " + idade);
         System.out.println("-----------------");
     }
+    public String toLinha(){
+        return nome + ";" + cpf + ";" + idade;
+    }
 }
